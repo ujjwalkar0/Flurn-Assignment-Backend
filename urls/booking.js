@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router()
 const Booking = require('../models/booking.js')
 const Seats = require('../models/seats.js')
+const seatPrice = require('../seatPrice.js')
+var price;
 
 router.get("/", async(req, res)=> {
     try{
@@ -22,37 +24,7 @@ router.post("/", async(req, res) => {
     if (!seat.is_booked) {        
 
         /* Percentage of seat booked. */
-        const class_of = await Seats.find({seat_class:seat.seat_class})
-        const booked_by_class = await Seats.find({seat_identifier:req.body.seat_identifier, class:seat.seat_class})
-        const percentage = (booked_by_class.length/class_of.length)*100
-        var price = 0
-
-        /* Get price value according to percentage */
-        if (percentage<40){
-            if (seat.min_price!="NaN"){
-                price = seat.min_price
-            }
-            else{
-                price = seat.normal_price
-            }
-        }
-        else if (percentage>40 && percentage<60){
-            if (seat.normal_price!="NaN"){
-                price = seat.normal_price
-            }
-            else{
-                price = seat.max_price
-            }
-        }
-        else{
-            if (seat.max_price!="NaN"){
-                price = seat.max_price
-            }
-            else{
-                price = seat.normal_price
-            }
-        }
-        console.log(price)
+        price = await seatPrice(seat, req.body.seat_identifier)
 
         /* New booking object */
         const booking = new Booking({
@@ -64,7 +36,7 @@ router.post("/", async(req, res) => {
         /* Save booking or  */
         try{
             const a1 = await booking.save()
-            await Seats.updateOne({seat_identifier:req.body.seat_identifier}, {isBooked: true})
+            await Seats.updateOne({seat_identifier:req.body.seat_identifier}, {is_booked: true})
             res.json({"booking_id":a1._id, "price":price})
         }
         catch(err){

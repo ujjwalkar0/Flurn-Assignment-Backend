@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router()
 const Seats = require('../models/seats.js')
+const seatPrice = require('../seatPrice.js')
+var price;
 
 router.get("/", async(req, res)=> {
     try{
@@ -15,9 +17,16 @@ router.get("/", async(req, res)=> {
 
 router.get("/:id", async(req, res)=> {
     try{
-        const seats = await Seats.find({seat_identifier:req.params["id"]})
-        console.log(seats)
-        res.json(seats) 
+        const seat = await Seats.findOne({seat_identifier:req.params["id"]})
+        price = await seatPrice(seat, req.body.seat_identifier)
+        is_booked = seat.is_booked
+
+        console.log(seat)
+        res.json({
+            "seat_identifier": req.params["id"],
+            "price": price,
+            "is_booked": is_booked
+        }) 
     }
     catch(err){
         console.log(err)
