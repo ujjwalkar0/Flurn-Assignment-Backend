@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 var url = "mongodb://172.17.0.1:27017/flurn"
+
 const app = express()
+const port = process.env.PORT || 8080
+
 require('dotenv').config();
 
 if (process.env.heroku==true){
@@ -25,6 +28,6 @@ const booking = require('./urls/booking.js')
 app.use('/seats/', seats)
 app.use('/booking/', booking)
  
-app.listen(8000, () => {
+app.listen(port, () => {
     console.log("Server Started...")
 })
