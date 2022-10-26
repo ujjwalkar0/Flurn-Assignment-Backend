@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080
 require('dotenv').config();
 
 if (process.env.heroku==true){
-    url = process.env.database+"/flurn"
+    url = process.env.database
 }
 
 console.log(url)
