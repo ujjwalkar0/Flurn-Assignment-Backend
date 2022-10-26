@@ -1,0 +1,31 @@
+version: "3"
+
+services:  
+  app:
+    container_name: flurn-server
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    networks:
+      - flurn
+  
+  mongo:
+    container_name: flurn-db
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    
+    networks:
+      - flurn
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  flurn:
+    driver: bridge
+  
+volumes:
+  mongo-data:
+    driver: local

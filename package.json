@@ -1,0 +1,39 @@
+{
+  "name": "flurn",
+  "version": "1.0.0",
+  "description": "Flurn Assignment, Backend Development: Build a Booking Service which allows you to choose seats and book",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ujjwalkar0/Flurn-Assignment-Backend.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "CRUD",
+    "expressjs"
+  ],
+  "author": "ujjwalkar21@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ujjwalkar0/Flurn-Assignment-Backend/issues"
+  },
+  "homepage": "https://github.com/ujjwalkar0/Flurn-Assignment-Backend#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.11.0",
+    "mongoose": "^6.6.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}
