@@ -7,7 +7,7 @@ var price;
 
 router.get("/", async(req, res)=> {
     try{
-        const seats = await Booking.find({phone:req.query.userIdentifier})
+        const seats = await Booking.findOne({phone:req.query.userIdentifier})
         console.log(req.query.userIdentifier, seats)
         res.json(seats)
     }
