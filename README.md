@@ -60,3 +60,34 @@ Return all bookings created by the user. The API should search by email or phone
 
 
 ![image](https://user-images.githubusercontent.com/55041104/198203695-74d6aa5d-3a10-42b9-bc49-fffc5ea4868a.png)
+
+# Installation on Local Machine
+
+### Using Docker
+
+```bash
+git clone https://github.com/ujjwalkar0/Flurn-Assignment-Backend  # Clone the repository
+cd Flurn-Assignment-Backend/  # Enter the repository
+docker-compose build  # Build the docker container
+docker-compose up  # Run the container
+```
+
+### Without docker
+
+```bash
+git clone https://github.com/ujjwalkar0/Flurn-Assignment-Backend  # Clone the repository
+cd Flurn-Assignment-Backend/  # Enter the repository
+npm install  # Install dependencies
+npm start # Start the server
+
+# Note: node, MongoDB, python must be installed in your machine.
+
+virtualenv venv  # Create a virtual environment
+source venv/bin/activate # Linux  --> Activate virtual environment 
+.\venv\scripts\activate # Windows --> Activate virtual environment 
+
+pip install -r requirements.txt 
+
+python uploadToDb.py  # Preprocess CSV files and upload to the database 
+
+```
